@@ -14,20 +14,44 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection, computerSelection) {
-    let gameString = `${playerSelection} against ${computerSelection}.`;
-
     playerSelection = playerSelection.toLowerCase();
     computerSelection = computerSelection.toLowerCase();
 
     if (playerSelection === computerSelection) {
-        return gameString + " It's a tie!";
+        return "Tie";
     } else if (
         playerSelection === "rock" && computerSelection === "paper" ||
         playerSelection === "paper" && computerSelection === "scissors" ||
         playerSelection === "scissors" && computerSelection === "rock"
     ) {
-        return gameString + " You lost!";
+        return "Lost";
     } else {
-        return gameString + " You won!";
+        return "Won";
     }
 }
+
+function game() {
+    let playerScore = 0;
+    let computerScore = 0;
+    for (let i = 0; i < 5; i++) {
+        let playerSelection = prompt("Play Rock, Paper or Scissors!");
+        let computerSelection = getComputerChoice();
+        let gameString = `${playerSelection} against ${computerSelection}.`;
+
+        let result = playRound(playerSelection, computerSelection);
+
+
+        if (result === "Tie") {
+            alert(`${gameString} It's a tie!`);
+        } else if (result === "Lost") {
+            computerScore++;
+            alert(`${gameString} You lost!`);
+        } else {
+            playerScore++;
+            alert(`${gameString} You won!`);
+        }
+    }
+    alert(`Scores: Player ${playerScore}, Computer ${computerScore}`);
+}
+
+game();
